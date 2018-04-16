@@ -24,7 +24,7 @@ public class GitHubService {
     }
 
     /*
-     * For the purposes of this POC application we don't need this method
+     * For the purposes of this demo application we don't need this method
      * but realistically we'd probably use it to continue the loading of
      * repositories as we traverse the search graph.
      */

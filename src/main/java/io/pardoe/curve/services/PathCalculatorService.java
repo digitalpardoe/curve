@@ -15,32 +15,29 @@ public class PathCalculatorService {
     @Autowired
     private GitHubService gitHubService;
 
-    private User fromUser;
-    private User toUser;
-
     public ContributionPath calculate(String fromUsername, String toUsername) {
 
-        this.fromUser = gitHubService.getUser(fromUsername);
-        this.toUser = gitHubService.getUser(toUsername);
+        User fromUser = gitHubService.getUser(fromUsername);
+        User toUser = gitHubService.getUser(toUsername);
 
         ArrayList<Repository> repositoriesPath;
 
-        Repository initialCalculation = this.initialCalculation();
+        Repository initialCalculation = this.initialCalculation(fromUser, toUser);
 
         if (initialCalculation != null) {
             repositoriesPath = new ArrayList<Repository>() {{ add(initialCalculation); }};
         } else {
-            repositoriesPath = fullCalculation();
+            repositoriesPath = fullCalculation(fromUser, toUser);
         }
 
-        return new ContributionPath(this.fromUser, this.toUser, repositoriesPath);
+        return new ContributionPath(fromUser, toUser, repositoriesPath);
     }
 
     /*
      * This is premature optimisation but it seems a shame not to gain a little
      * efficiency when the opportunity presents itself in such a clear way.
      */
-    private Repository initialCalculation() {
+    private Repository initialCalculation(User fromUser, User toUser) {
 
         ArrayList<Repository> fromList = new ArrayList<>(fromUser.getRepositories());
         ArrayList<Repository> toList = toUser.getRepositories();
@@ -66,7 +63,7 @@ public class PathCalculatorService {
      *      users as vertices
      *  -   Set a maximum search depth as this thing could run forever
      */
-    private ArrayList<Repository> fullCalculation() {
+    private ArrayList<Repository> fullCalculation(User fromUser, User toUser) {
 
         LinkedList<Graphable> toVisit = new LinkedList<>();
         HashSet<Graphable> visited = new HashSet<>();
