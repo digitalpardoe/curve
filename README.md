@@ -17,4 +17,4 @@ The following files contain comments outlining my thoughts as I was building thi
 * [GitHubService.java](src/main/java/io/pardoe/curve/services/GitHubService.java)
 * [PathCalculatorService.java](src/main/java/io/pardoe/curve/services/PathCalculatorService.java)
 
-Apologies in advance for the quality of the Java, it has been a few years since I've written any.
+Apologies in advance for the quality of the Java, it has been a few years since I've written any and there should probably be more JavaDoc.

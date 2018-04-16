@@ -1,9 +1,9 @@
 package io.pardoe.curve.services;
 
-import io.pardoe.curve.models.interfaces.Graphable;
-import io.pardoe.curve.responses.ContributionPath;
 import io.pardoe.curve.models.Repository;
 import io.pardoe.curve.models.User;
+import io.pardoe.curve.models.interfaces.Graphable;
+import io.pardoe.curve.responses.ContributionPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ public class PathCalculatorService {
         Repository initialCalculation = this.initialCalculation(fromUser, toUser);
 
         if (initialCalculation != null) {
-            repositoriesPath = new ArrayList<Repository>() {{ add(initialCalculation); }};
+            repositoriesPath = new ArrayList<>() {{ add(initialCalculation); }};
         } else {
             repositoriesPath = fullCalculation(fromUser, toUser);
         }
